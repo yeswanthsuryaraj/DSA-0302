@@ -1,0 +1,70 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOEyTyxkE4xGJ5eco6t/SOE",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Dathu03184/DSA0302-NLP/blob/main/Assessments/CO1-AT3/Problem%2001.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "ysigDAvyomcs",
+        "outputId": "79088825-fcc8-472c-ca23-491f0245c7ab"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "4\n",
+            "The dog's tail wagged -- twice!\n",
+            "5 The dog's tail wagged twice\n",
+            "state-of-the-art NLP systems, circa 2026.\n",
+            "4 state-of-the-art NLP systems circa\n",
+            "12345 ... ???\n",
+            "0\n",
+            "Don't re-use rock--roll O'Neill's x\n",
+            "6 Don't re-use rock roll O'Neill's x\n"
+          ]
+        }
+      ],
+      "source": [
+        "import re\n",
+        "n = int(input())\n",
+        "pattern = r\"[A-Za-z]+(?:['-][A-Za-z]+)*\"\n",
+        "for _ in range(n):\n",
+        "    line = input()\n",
+        "    tokens = re.findall(pattern, line)\n",
+        "    if tokens:\n",
+        "        print(len(tokens), *tokens)\n",
+        "    else:\n",
+        "        print(0)"
+      ]
+    }
+  ]
+}

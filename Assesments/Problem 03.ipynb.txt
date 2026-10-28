@@ -1,0 +1,98 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOJXJLJWfbvnILbhFj3nQKC",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Dathu03184/DSA0302-NLP/blob/main/Assessments/CO1-AT3/Problem%2003.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 4,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "dDx5fdY_3iCi",
+        "outputId": "9a38a9ca-4903-4277-b869-c5716fab898d"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "3\n",
+            "goose N+PL geese\n",
+            "go V+PAST went\n",
+            "good ADJ+COMP better\n",
+            "8\n",
+            "cat N+PL\n",
+            "cats\n",
+            "church N+PL\n",
+            "churches\n",
+            "baby N+PL\n",
+            "babies\n",
+            "stop V+PROG\n",
+            "stoping\n",
+            "make V+PROG\n",
+            "making\n",
+            "carry V+PAST\n",
+            "carried\n",
+            "goose N+PL\n",
+            "geese\n",
+            "go V+PAST\n",
+            "went\n"
+          ]
+        }
+      ],
+      "source": [
+        "def form(s, f):\n",
+        "    if f in [\"N+PL\", \"V+3SG\"]:\n",
+        "        if s.endswith((\"s\", \"x\", \"z\", \"ch\", \"sh\")):\n",
+        "            return s + \"es\"\n",
+        "        if s.endswith(\"y\"):\n",
+        "            return s[:-1] + \"ies\"\n",
+        "        return s + \"s\"\n",
+        "    if f == \"V+PROG\":\n",
+        "        if s.endswith(\"e\"):\n",
+        "            return s[:-1] + \"ing\"\n",
+        "        return s + \"ing\"\n",
+        "    if s.endswith(\"e\"):\n",
+        "        s = s[:-1]\n",
+        "    if s.endswith(\"y\"):\n",
+        "        s = s[:-1] + \"i\"\n",
+        "    return s + {\"V+PAST\": \"ed\", \"ADJ+COMP\": \"er\",\n",
+        "                \"ADJ+SUP\": \"est\"}[f]\n",
+        "L = int(input())\n",
+        "d = {}\n",
+        "for _ in range(L):\n",
+        "    s, f, w = input().split()\n",
+        "    d[(s, f)] = w\n",
+        "Q = int(input())\n",
+        "for _ in range(Q):\n",
+        "    s, f = input().split()\n",
+        "    print(d[(s, f)] if (s, f) in d else form(s, f))"
+      ]
+    }
+  ]
+}

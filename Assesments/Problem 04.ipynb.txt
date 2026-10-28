@@ -1,0 +1,105 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNQaYGy5q23g6v7ABkT6no9",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Dathu03184/DSA0302-NLP/blob/main/Assessments/CO1-AT3/Problem%2004.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "nAm5yQ1-xvNw",
+        "outputId": "0f0f85ef-2b37-445f-bf7e-dceb621d380c"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "5\n",
+            "cat N\n",
+            "watch N\n",
+            "watch V\n",
+            "study V\n",
+            "big ADJ\n",
+            "8\n",
+            "cats\n",
+            "cat+N+PL\n",
+            "watches\n",
+            "watch+N+PL, watch+V+3SG\n",
+            "watching\n",
+            "watch+V+PROG\n",
+            "studied\n",
+            "UNKNOWN\n",
+            "bigger\n",
+            "UNKNOWN\n",
+            "cat\n",
+            "cat+N\n",
+            "biggest\n",
+            "UNKNOWN\n",
+            "elephants\n",
+            "UNKNOWN\n"
+          ]
+        }
+      ],
+      "source": [
+        "S = int(input())\n",
+        "d = {}\n",
+        "for _ in range(S):\n",
+        "    s, p = input().split()\n",
+        "    d.setdefault(s, []).append(p)\n",
+        "a = {}\n",
+        "for s in d:\n",
+        "    for p in d[s]:\n",
+        "        a.setdefault(s, []).append(s + \"+\" + p)\n",
+        "        if p == \"N\":\n",
+        "            f = [\"PL\"]\n",
+        "        elif p == \"V\":\n",
+        "            f = [\"3SG\", \"PROG\", \"PAST\"]\n",
+        "        else:\n",
+        "            f = [\"COMP\", \"SUP\"]\n",
+        "        for x in f:\n",
+        "            if x == \"PL\" or x == \"3SG\":\n",
+        "                w = s + \"es\" if s.endswith((\"s\", \"x\", \"z\", \"ch\", \"sh\")) else s + \"s\"\n",
+        "            elif x == \"PROG\":\n",
+        "                w = s[:-1] + \"ing\" if s.endswith(\"e\") else s + \"ing\"\n",
+        "            elif x == \"PAST\":\n",
+        "                w = s + \"d\" if s.endswith(\"e\") else s + \"ed\"\n",
+        "            elif x == \"COMP\":\n",
+        "                w = s + \"r\" if s.endswith(\"e\") else s + \"er\"\n",
+        "            else:\n",
+        "                w = s + \"st\" if s.endswith(\"e\") else s + \"est\"\n",
+        "            a.setdefault(w, []).append(s + \"+\" + p + \"+\" + x)\n",
+        "Q = int(input())\n",
+        "for _ in range(Q):\n",
+        "    w = input()\n",
+        "    print(\", \".join(sorted(set(a[w]))) if w in a else \"UNKNOWN\")"
+      ]
+    }
+  ]
+}

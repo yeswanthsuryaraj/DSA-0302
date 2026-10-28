@@ -1,0 +1,94 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyM/Mpta9jE0q9dkxNdcFRIK",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Dathu03184/DSA0302-NLP/blob/main/Assessments/CO1-AT3/Problem%2002.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 2,
+      "metadata": {
+        "id": "XOwoouyusy8Y",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "d844e651-e9ba-4eb2-8f20-c72c792a16ed"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "5 3\n",
+            "b a !\n",
+            "0 \n",
+            "1 4\n",
+            "5\n",
+            "0 b 1\n",
+            "1 a 2\n",
+            "2 a 3\n",
+            "3 a 3\n",
+            "3 ! 4\n",
+            "5\n",
+            "baa!\n",
+            "ACCEPT\n",
+            "baaa!\n",
+            "ACCEPT\n",
+            "ba!\n",
+            "REJECT\n",
+            "b\n",
+            "REJECT\n",
+            "baa\n",
+            "REJECT\n"
+          ]
+        }
+      ],
+      "source": [
+        "n, k = map(int, input().split())\n",
+        "alphabet = input().split()\n",
+        "start = int(input())\n",
+        "a = list(map(int, input().split()))\n",
+        "final = set(a[1:])\n",
+        "t = int(input())\n",
+        "d = {}\n",
+        "for i in range(t):\n",
+        "    p, c, r = input().split()\n",
+        "    d.setdefault((int(p), c), []).append(int(r))\n",
+        "q = int(input())\n",
+        "for i in range(q):\n",
+        "    s = input()\n",
+        "    states = {start}\n",
+        "    if s == \"#\":\n",
+        "        s = \"\"\n",
+        "    for c in s:\n",
+        "        new = set()\n",
+        "        for p in states:\n",
+        "            new.update(d.get((p, c), []))\n",
+        "        states = new\n",
+        "    print(\"ACCEPT\" if states & final else \"REJECT\")"
+      ]
+    }
+  ]
+}
